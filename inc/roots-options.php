@@ -29,21 +29,8 @@ add_filter('option_page_capability_roots_options', 'roots_option_page_capability
 function roots_theme_options_add_page() {
   
   $roots_options = roots_get_theme_options();
-  if(!$roots_options['first_install_done']){   
-    $theme_page = add_theme_page(
-        __('Theme Activation', 'roots'),
-        __('Theme Activation', 'roots'),
-        'edit_theme_options',
-        'theme_activation',
-        'roots_theme_activation_render_page'
-    ); 
-  }
-  
-  else {
-    if ($_GET['page'] == 'theme_activation'){          
-          wp_redirect('/wp-admin/themes.php?page=theme_options');
-          exit();
-    }
+  $roots_activation_options = roots_get_theme_activation_options();
+  if($roots_activation_options['first_install_done']){   
     $theme_page = add_theme_page(
         __('Theme Options', 'roots'),
         __('Theme Options', 'roots'),
@@ -52,7 +39,6 @@ function roots_theme_options_add_page() {
         'roots_theme_options_render_page'
     );
   }
-
 
   if (!$theme_page)
     return;
@@ -198,15 +184,8 @@ function roots_get_default_theme_options($default_framework = '') {
     'google_analytics_id' => '',
     'root_relative_urls'  => true,
     'clean_menu'      => true,
-    'fout_b_gone'     => false,
     'bootstrap_javascript'  => false,
-    'bootstrap_less_javascript'  => false,    
-    'first_install_done' => false,
-    'create_front_page' => false,
-    'change_permalink_structure' => false,
-    'change_uploads_folder' => false,
-    'update_permalink_structure' => false,
-    'add_pages_to_primary_navigation' => false,               
+    'bootstrap_less_javascript'  => false,              
   );
 
   return apply_filters('roots_default_theme_options', $default_theme_options);

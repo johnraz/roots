@@ -205,7 +205,7 @@ function roots_theme_activation_options_validate($input) {
     if ($input['create_navigation_menus'] === 'no') {
       $input['create_navigation_menus'] = false;
     }
-    $output['create_navigation_menus'] = $input['create_navigation_menusgit st'];
+    $output['create_navigation_menus'] = $input['create_navigation_menus'];
   }   
   
   if (isset($input['add_pages_to_primary_navigation'])) {
